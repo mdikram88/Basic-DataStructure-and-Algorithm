@@ -1,17 +1,10 @@
 def insertion_sort(arr: list):
     array = arr.copy()    
 
-    n = len(array)
-    for i in range(1,n):
-        insert_index = i
-        current_value = array[i]
-        for j in range(i-1, -1, -1):
-            if array[j] > current_value:
-                array[j+1] = array[j]
-                insert_index = j
-            else:
-                break
-        array[insert_index] = current_value
+    for i in range(1, len(array)):
+        for j in range(i, 0, -1):
+            if array[j-1] > array[j]:
+                array[j-1], array[j] = array[j], array[j-1]
 
     
     return array
