@@ -110,33 +110,60 @@ class Double_LinkedList:
         else:
             cur_node.next = None
         
-    
-    
-    def __str__(self):
+    def transverse_from(self, index):
+        i = 0
+
+        cur = self.head
+
+        while i < index and cur.next:
+            cur = cur.next
+            i += 1
+
+        if i != index:
+            raise IndexError
+
+
+        return self.__str__(cur_node = cur)
+
+    def transverse_till(self, index):
+        i = 0
+
+        cur = self.head
+
+        while i < index and cur.next:
+            cur = cur.next
+            i += 1
+
+        if i != index:
+            raise IndexError
+
+        return self.__str__(self.head, end=index)
+
+
+    def __str__(self, cur_node=None, end=None):
         if self.is_empty():
             return ""
 
-        cur_node = self.head
+        if not cur_node:
+            cur_node = self.head
+
+        i = 0
         st = ""
         while cur_node.next:
             st += str(cur_node.data) + "->"
             cur_node = cur_node.next
+            i += 1
+
+            if end and i == end:
+                break
 
         st += str(cur_node.data)
         return st
 
 
-
 lt = Double_LinkedList()
 
-lt.append(1)
-lt.append(2)
-lt.append(3)
-lt.append(4)
-print(lt)
-
-lt.delete_at(3)
-# for ele in random.randint(1, 10, size=5):
-#     lt.append(ele)
+for ele in random.randint(1, 10, size=5):
+    lt.append(ele)
 
 print(lt)

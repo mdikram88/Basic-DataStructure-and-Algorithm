@@ -108,16 +108,53 @@ class LinkedList:
 
         cur_node.next = cur_node.next.next
         
+
+    def transverse_from(self, index):
+        i = 0
         
-    def __str__(self):
+        cur = self.head
+        
+        while i < index and cur.next:
+            cur = cur.next
+            i += 1
+
+        if i != index:
+            raise IndexError
+            
+
+        return self.__str__(cur)
+
+    def transverse_till(self, index):
+        i = 0
+
+        cur = self.head
+
+        while i < index and cur.next:
+            cur = cur.next
+            i += 1
+
+        if i != index:
+            raise IndexError
+
+        return self.__str__(self.head, end=index)
+    
+            
+    def __str__(self, cur_node=None, end=None):
         if self.is_empty():
             return ""
-        
-        cur_node = self.head
+
+        if not cur_node:
+            cur_node = self.head
+
+        i = 0
         st = ""
         while cur_node.next:
             st += str(cur_node.data) + "->"
             cur_node = cur_node.next
+            i += 1
+            
+            if end and i == end:
+                break
 
         st += str(cur_node.data)
         return st
@@ -128,9 +165,8 @@ lt.append(1)
 lt.append(2)
 lt.append(3)
 lt.append(4)
-lt.delete_at(0)
 
-
+print(lt.transverse_from(2))
 # num = int(input("Enter the size of Linked List you want: "))
 
 # for ele in random.randint(1, 100, size=num):
