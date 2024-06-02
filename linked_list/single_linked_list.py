@@ -67,7 +67,47 @@ class LinkedList:
             
         new_node.next = cur_node.next
         cur_node.next = new_node
-            
+
+
+    def delete_head(self):
+        if self.is_empty():
+            return 
+
+        self.head = self.head.next
+
+
+    def delete_tail(self):
+        if self.is_empty():
+            return
+
+        i = 0
+        cur_node = self.head
+
+        while cur_node.next.next:
+            cur_node = cur_node.next
+
+        cur_node.next = None
+
+    
+    def delete_at(self, index):
+        if self.is_empty():
+            raise IndexError
+
+        if index == 0:
+            return self.delete_head()
+        
+        i = 0
+        cur_node = self.head
+
+        while i < index - 1 and cur_node.next.next:
+            cur_node = cur_node.next
+            i += 1
+
+        if i != index - 1:
+            raise IndexError
+
+        cur_node.next = cur_node.next.next
+        
         
     def __str__(self):
         if self.is_empty():
@@ -84,11 +124,17 @@ class LinkedList:
 
 
 lt = LinkedList()
+lt.append(1)
+lt.append(2)
+lt.append(3)
+lt.append(4)
+lt.delete_at(0)
 
-num = int(input("Enter the size of Linked List you want: "))
 
-for ele in random.randint(1, 100, size=num):
-    lt.append(ele)
+# num = int(input("Enter the size of Linked List you want: "))
+
+# for ele in random.randint(1, 100, size=num):
+#     lt.append(ele)
 
 
 print(lt)
